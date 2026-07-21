@@ -39,18 +39,19 @@ export default function FaqSection() {
       </div>
 
       <div className="faq-accordion-container">
-        {FAQS.map((faq) => (
+        {FAQS.map((faq, index) => (
           <div
             key={faq.id}
-            className={`faq-item glass-card ${openFaq === faq.id ? 'open' : ''}`}
+            className={`faq-item glass-card scroll-stagger-item ${openFaq === faq.id ? 'open' : ''}`}
+            style={{ animationDelay: `${index * 0.12}s` }}
             onClick={() => toggleFaq(faq.id)}
           >
             <div className="faq-question-bar">
               <h3 className="faq-question">{faq.question}</h3>
-              <span className="faq-toggle-icon">{openFaq === faq.id ? '−' : '+'}</span>
+              <span className="faq-toggle-icon faq-icon">{openFaq === faq.id ? '−' : '+'}</span>
             </div>
             {openFaq === faq.id && (
-              <div className="faq-answer-box">
+              <div className="faq-answer-box tab-panel-animated">
                 <p>{faq.answer}</p>
               </div>
             )}

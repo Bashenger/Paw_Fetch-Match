@@ -7,6 +7,13 @@ const INITIAL_PETS = [
     name: 'Buddy',
     category: 'Dog',
     status: 'Available',
+    breed: 'Golden Retriever',
+    age: '2 Years',
+    gender: 'Male',
+    weight: '65 lbs',
+    size: 'Large',
+    location: 'Sunshine Animal Rescue, SF',
+    adoptionFee: '$200',
     description: 'Playful 2-year-old Golden Retriever. Loves outdoors, ball games, kids, and running in large yards.',
     image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1000&q=90',
     dateAdded: '2026-07-20',
@@ -15,13 +22,28 @@ const INITIAL_PETS = [
     goodWithPets: true,
     energyLevel: 'High',
     wfhFriendly: true,
-    isUrgent: false
+    isUrgent: false,
+    personality: ['Playful', 'Energetic', 'Kid-Friendly', 'Affectionate', 'Ball Fetcher'],
+    health: {
+      vaccinated: true,
+      spayedNeutered: true,
+      microchipped: true,
+      healthNote: 'Fully vaccinated, microchipped & regular checkups done.'
+    },
+    bioStory: 'Buddy was rescued from a rural farm where he loved chasing tennis balls. He is super friendly, knows basic commands like Sit and Paw, and gets along amazingly with family members of all ages.'
   },
   {
     id: 'PET-3091',
     name: 'Luna',
     category: 'Cat',
     status: 'Adopted',
+    breed: 'Siamese',
+    age: '1 Year',
+    gender: 'Female',
+    weight: '8 lbs',
+    size: 'Small',
+    location: 'City Feline Haven, NY',
+    adoptionFee: '$120',
     description: 'Calm 1-year-old Siamese cat. Prefers warm lap cuddles, quiet sunbeams, and small apartment spaces.',
     image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1000&q=90',
     dateAdded: '2026-07-19',
@@ -30,13 +52,28 @@ const INITIAL_PETS = [
     goodWithPets: true,
     energyLevel: 'Calm',
     wfhFriendly: true,
-    isUrgent: false
+    isUrgent: false,
+    personality: ['Calm', 'Lap Cuddler', 'Quiet', 'Gentle', 'Loves Sunbeams'],
+    health: {
+      vaccinated: true,
+      spayedNeutered: true,
+      microchipped: true,
+      healthNote: 'Spayed, vaccinated, and indoor-only trained.'
+    },
+    bioStory: 'Luna is a sweet Siamese kitten who loves purring while you work on your laptop. She is gentle around children and loves cozy blanket nooks.'
   },
   {
     id: 'PET-4482',
     name: 'Barnaby',
     category: 'Rabbit',
     status: 'Available',
+    breed: 'Holland Lop',
+    age: '8 Months',
+    gender: 'Male',
+    weight: '3.5 lbs',
+    size: 'Small',
+    location: 'Small Paws Rescue, Austin',
+    adoptionFee: '$75',
     description: 'Gentle Holland Lop rabbit. Needs immediate loving home & special care! Fond of fresh greens and soft pets.',
     image: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=1000&q=90',
     dateAdded: '2026-07-21',
@@ -45,13 +82,28 @@ const INITIAL_PETS = [
     goodWithPets: false,
     energyLevel: 'Calm',
     wfhFriendly: true,
-    isUrgent: true // Urgent Adoption sample
+    isUrgent: true,
+    personality: ['Gentle', 'Quiet', 'Curious', 'Lover of Herbs', 'Soft Floof'],
+    health: {
+      vaccinated: true,
+      spayedNeutered: true,
+      microchipped: false,
+      healthNote: 'Health checked by exotics vet. Requires high fiber hay diet.'
+    },
+    bioStory: 'Barnaby is a super adorable floppy-eared Holland Lop looking for a quiet home. He loves munching on fresh cilantro and romaine lettuce.'
   },
   {
     id: 'PET-7193',
     name: 'Pip',
     category: 'Bird',
     status: 'Available',
+    breed: 'Cockatiel',
+    age: '1.5 Years',
+    gender: 'Male',
+    weight: '90g',
+    size: 'Small',
+    location: 'Feathered Friends Sanctuary, Seattle',
+    adoptionFee: '$90',
     description: 'Vibrant & cheerful Cockatiel. Whistles tunes, enjoys perch playtime, perfect for apartments and WFH home setups.',
     image: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=1000&q=90',
     dateAdded: '2026-07-21',
@@ -60,7 +112,15 @@ const INITIAL_PETS = [
     goodWithPets: true,
     energyLevel: 'Moderate',
     wfhFriendly: true,
-    isUrgent: false
+    isUrgent: false,
+    personality: ['Musical', 'Social', 'Smart Whistler', 'Perch Lover', 'Interactive'],
+    health: {
+      vaccinated: false,
+      spayedNeutered: false,
+      microchipped: true,
+      healthNote: 'Avian vet health clearance. Healthy feathers and diet.'
+    },
+    bioStory: 'Pip loves singing theme tunes and sitting on shoulders during remote work meetings! He is very social and thrives with gentle human interaction.'
   }
 ];
 
@@ -104,6 +164,18 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
   const [status, setStatus] = useState('Available');
   const [description, setDescription] = useState('');
 
+  // Pet Profile Form Fields
+  const [age, setAge] = useState('');
+  const [breed, setBreed] = useState('');
+  const [gender, setGender] = useState('Male');
+  const [weight, setWeight] = useState('');
+  const [location, setLocation] = useState('');
+  const [adoptionFee, setAdoptionFee] = useState('');
+  const [vaccinated, setVaccinated] = useState(true);
+  const [spayedNeutered, setSpayedNeutered] = useState(true);
+  const [microchipped, setMicrochipped] = useState(true);
+  const [personalityInput, setPersonalityInput] = useState('');
+
   // Compatibility Traits Checkboxes
   const [apartmentFriendly, setApartmentFriendly] = useState(true);
   const [goodWithKids, setGoodWithKids] = useState(true);
@@ -121,8 +193,9 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
   // Form Visibility state (handled via props/local helper)
   const formRef = useRef(null);
 
-  // Adoption Inquiry Modal State
+  // Adoption Inquiry & Detailed Profile Modal States
   const [inquiryPet, setInquiryPet] = useState(null);
+  const [profilePet, setProfilePet] = useState(null);
 
   // Validation Error State
   const [errors, setErrors] = useState({});
@@ -473,6 +546,12 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
       name: petName.trim(),
       category,
       status,
+      breed: breed.trim() || category,
+      age: age.trim() || '1 Year',
+      gender: gender || 'Male',
+      weight: weight.trim() || 'Standard',
+      location: location.trim() || 'Happy Paws Rescue Partner',
+      adoptionFee: adoptionFee.trim() || '$150',
       description: description.trim(),
       image: finalImage,
       dateAdded: new Date().toLocaleDateString(),
@@ -482,7 +561,17 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
       energyLevel,
       wfhFriendly: true,
       isUrgent, // Urgency Stamp flag
-      isUserCreated: true // Flag indicating this pet card was posted by the current user
+      isUserCreated: true, // Flag indicating this pet card was posted by the current user
+      personality: personalityInput.trim()
+        ? personalityInput.split(',').map((s) => s.trim()).filter(Boolean)
+        : ['Friendly', 'Loving', 'House Trained'],
+      health: {
+        vaccinated,
+        spayedNeutered,
+        microchipped,
+        healthNote: 'Full health check completed upon intake.'
+      },
+      bioStory: description.trim()
     };
     setPets((prevPets) => [newPet, ...prevPets]);
     showToast(`🎉 Posted "${petName}" on Paw-Fect Match! Auto-assigned ID: ${autoAssignedId}`);
@@ -496,6 +585,16 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
     setCategory('Dog');
     setStatus('Available');
     setDescription('');
+    setAge('');
+    setBreed('');
+    setGender('Male');
+    setWeight('');
+    setLocation('');
+    setAdoptionFee('');
+    setVaccinated(true);
+    setSpayedNeutered(true);
+    setMicrochipped(true);
+    setPersonalityInput('');
     setApartmentFriendly(true);
     setGoodWithKids(true);
     setGoodWithPets(true);
@@ -634,6 +733,197 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
               >
                 ❤️ Confirm Adoption Interest
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* FULL PET PROFILE MODAL POP-UP */}
+      {profilePet && (
+        <div className="modal-overlay profile-modal-overlay" onClick={() => setProfilePet(null)}>
+          <div className="modal-content glass-card pet-profile-modal" onClick={(e) => e.stopPropagation()}>
+            <button type="button" className="modal-close profile-modal-close" onClick={() => setProfilePet(null)}>✕</button>
+
+            {/* Profile Hero Header Image */}
+            <div className="profile-hero-banner">
+              <img
+                src={profilePet.image || 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1000&q=80'}
+                alt={profilePet.name}
+                className="profile-hero-img"
+              />
+              <div className="profile-hero-gradient-overlay" />
+              <div className="profile-hero-badges">
+                <span className="category-tag lg-tag">
+                  {getCategoryIcon(profilePet.category)} {profilePet.category}
+                </span>
+                {profilePet.isUrgent && (
+                  <span className="badge-urgent-glowing">❤️ Urgent Adoption</span>
+                )}
+                <span className={`badge-status ${profilePet.status === 'Available' ? 'badge-green' : 'badge-red'}`}>
+                  {profilePet.status === 'Available' ? '● Available' : '✓ Adopted'}
+                </span>
+              </div>
+            </div>
+
+            <div className="profile-body-container">
+              {/* Pet Title & Quick Meta */}
+              <div className="profile-title-header">
+                <div className="title-left">
+                  <h2 className="profile-pet-name">{profilePet.name}</h2>
+                  <p className="profile-subtitle">
+                    {profilePet.breed || profilePet.category} • Auto ID: <strong>{profilePet.id}</strong>
+                  </p>
+                </div>
+                <div className="title-right">
+                  <span className="profile-fee-tag">💰 Fee: {profilePet.adoptionFee || '$150'}</span>
+                  <span className="profile-location-tag">📍 {profilePet.location || 'Local Adoption Hub'}</span>
+                </div>
+              </div>
+
+              {/* Match Score Bar */}
+              {isMatchCalculated && (
+                <div className="profile-match-banner">
+                  🎯 Paw-Fect Match Compatibility: <strong>{calculateMatchScore(profilePet)}% Match</strong> for your setup
+                </div>
+              )}
+
+              {/* Quick Specs 4-Grid */}
+              <div className="profile-specs-grid">
+                <div className="spec-card">
+                  <span className="spec-icon">🎂</span>
+                  <div className="spec-info">
+                    <span className="spec-label">Age</span>
+                    <span className="spec-val">{profilePet.age || '1 Year'}</span>
+                  </div>
+                </div>
+
+                <div className="spec-card">
+                  <span className="spec-icon">{profilePet.gender === 'Female' ? '♀️' : '♂️'}</span>
+                  <div className="spec-info">
+                    <span className="spec-label">Gender</span>
+                    <span className="spec-val">{profilePet.gender || 'Male'}</span>
+                  </div>
+                </div>
+
+                <div className="spec-card">
+                  <span className="spec-icon">🧬</span>
+                  <div className="spec-info">
+                    <span className="spec-label">Breed</span>
+                    <span className="spec-val">{profilePet.breed || profilePet.category}</span>
+                  </div>
+                </div>
+
+                <div className="spec-card">
+                  <span className="spec-icon">⚖️</span>
+                  <div className="spec-info">
+                    <span className="spec-label">Weight / Size</span>
+                    <span className="spec-val">{profilePet.weight || profilePet.size || 'Standard'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Story / Biography */}
+              <div className="profile-section">
+                <h4 className="profile-section-title">📖 Biography & Background</h4>
+                <p className="profile-bio-text">
+                  {profilePet.bioStory || profilePet.description || 'No detailed bio provided for this pet yet.'}
+                </p>
+              </div>
+
+              {/* Personality Tags */}
+              {profilePet.personality && profilePet.personality.length > 0 && (
+                <div className="profile-section">
+                  <h4 className="profile-section-title">✨ Personality & Temperament</h4>
+                  <div className="personality-tags-wrap">
+                    {profilePet.personality.map((trait, idx) => (
+                      <span key={idx} className="personality-pill">
+                        🌟 {trait}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Suitability & Environment */}
+              <div className="profile-section">
+                <h4 className="profile-section-title">🏡 Environment & Compatibility</h4>
+                <div className="suitability-badges-grid">
+                  <div className={`suit-pill-card ${profilePet.apartmentFriendly ? 'suit-yes' : 'suit-no'}`}>
+                    <span>🏢 Apartment Living:</span> <strong>{profilePet.apartmentFriendly ? '✅ Apartment Friendly' : '⚠️ House / Yard Needed'}</strong>
+                  </div>
+                  <div className={`suit-pill-card ${profilePet.goodWithKids ? 'suit-yes' : 'suit-no'}`}>
+                    <span>👶 Good with Children:</span> <strong>{profilePet.goodWithKids ? '✅ Kid Approved' : '⚠️ Adult Home Preferred'}</strong>
+                  </div>
+                  <div className={`suit-pill-card ${profilePet.goodWithPets ? 'suit-yes' : 'suit-no'}`}>
+                    <span>🐶 Good with Other Pets:</span> <strong>{profilePet.goodWithPets ? '✅ Multi-pet Friendly' : '⚠️ Solo Pet Home'}</strong>
+                  </div>
+                  <div className="suit-pill-card suit-yes">
+                    <span>⚡ Energy Level:</span> <strong>⚡ {profilePet.energyLevel || 'Moderate'} Energy</strong>
+                  </div>
+                </div>
+              </div>
+
+              {/* Medical & Health Record */}
+              <div className="profile-section health-section">
+                <h4 className="profile-section-title">🩺 Medical Pass & Health Record</h4>
+                <div className="health-grid">
+                  <div className="health-item">
+                    <span className="health-check">
+                      {profilePet.health?.vaccinated !== false ? '✅' : '❌'}
+                    </span>
+                    <span>Vaccinations Up to Date</span>
+                  </div>
+                  <div className="health-item">
+                    <span className="health-check">
+                      {profilePet.health?.spayedNeutered !== false ? '✅' : '❌'}
+                    </span>
+                    <span>Spayed / Neutered</span>
+                  </div>
+                  <div className="health-item">
+                    <span className="health-check">
+                      {profilePet.health?.microchipped ? '✅' : 'ℹ️'}
+                    </span>
+                    <span>Microchipped</span>
+                  </div>
+                </div>
+                {profilePet.health?.healthNote && (
+                  <p className="health-note">
+                    🩺 <em>Vet Note:</em> {profilePet.health.healthNote}
+                  </p>
+                )}
+              </div>
+
+              {/* Modal Actions */}
+              <div className="profile-actions-bar">
+                <button
+                  type="button"
+                  className={`btn-adopt-main ${profilePet.status === 'Available' ? 'adopt-active' : 'adopt-disabled'}`}
+                  onClick={() => {
+                    const currentPet = profilePet;
+                    setProfilePet(null);
+                    handleAdoptInquiry(currentPet);
+                  }}
+                  disabled={profilePet.status === 'Adopted'}
+                >
+                  {profilePet.status === 'Available' ? '❤️ Start Adoption Inquiry' : '✓ Already Adopted'}
+                </button>
+
+                <button
+                  type="button"
+                  className="action-btn btn-print"
+                  onClick={() => handlePrint(profilePet)}
+                >
+                  🖨️ Print Profile Passport
+                </button>
+
+                <button
+                  type="button"
+                  className="action-btn btn-share"
+                  onClick={() => handleShare(profilePet)}
+                >
+                  🔗 Share Profile
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -985,8 +1275,8 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
                       </div>
                     </div>
 
-                    {/* Pet Image / Uploaded Thumbnail */}
-                    <div className="card-image-wrapper">
+                    {/* Pet Image / Uploaded Thumbnail - Clickable for Full Profile */}
+                    <div className="card-image-wrapper clickable-image" onClick={() => setProfilePet(pet)} title="Click to view full pet profile">
                       {pet.image ? (
                         <img src={pet.image} alt={pet.name} className="card-pet-img" />
                       ) : (
@@ -994,9 +1284,12 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
                           <span>{getCategoryIcon(pet.category)}</span>
                         </div>
                       )}
+                      <div className="image-hover-overlay">
+                        <span>👤 View Profile</span>
+                      </div>
                     </div>
 
-                    {/* DYNAMIC PAW-FECT MATCH SCORE METER BAR - ONLY DISPLAYED WHEN USER ENTERS PROMPT OR SELECTS FILTER */}
+                    {/* DYNAMIC PAW-FECT MATCH SCORE METER BAR */}
                     {isMatchCalculated && (
                       <div className="match-meter-wrapper fade-in-mode">
                         <div className="match-meter-header">
@@ -1014,6 +1307,22 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
                       </div>
                     )}
 
+                    {/* Profile Spec Highlights Ribbon */}
+                    <div className="card-profile-highlights">
+                      <span className="mini-spec-badge">🎂 {pet.age || '1 Yr'}</span>
+                      <span className="mini-spec-badge">{pet.gender === 'Female' ? '♀️ Female' : '♂️ Male'}</span>
+                      {pet.breed && <span className="mini-spec-badge">🧬 {pet.breed}</span>}
+                    </div>
+
+                    {/* Personality Pill Tags */}
+                    {pet.personality && pet.personality.length > 0 && (
+                      <div className="card-personality-preview">
+                        {pet.personality.slice(0, 3).map((p, i) => (
+                          <span key={i} className="mini-personality-pill">✨ {p}</span>
+                        ))}
+                      </div>
+                    )}
+
                     {/* Suitability Badges */}
                     <div className="suitability-badges">
                       {pet.apartmentFriendly && <span className="suit-badge">🏢 Apartment OK</span>}
@@ -1024,7 +1333,9 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
 
                     {/* Card Content Details & Auto-Assigned Pet ID */}
                     <div className="card-content">
-                      <h3 className="pet-card-title">{pet.name}</h3>
+                      <h3 className="pet-card-title clickable-title" onClick={() => setProfilePet(pet)}>
+                        {pet.name}
+                      </h3>
                       <div className="pet-id-pill">Auto ID: {pet.id}</div>
                       <p className="pet-description">{pet.description}</p>
                     </div>
@@ -1218,6 +1529,131 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
                 </div>
               </div>
 
+              {/* DETAILED PET PROFILE INPUT FIELDS */}
+              <div className="form-section-divider">
+                <span>👤 Detailed Pet Profile Attributes</span>
+              </div>
+
+              <div className="form-grid-2col">
+                <div className="form-field">
+                  <label htmlFor="breed">Breed</label>
+                  <input
+                    type="text"
+                    id="breed"
+                    placeholder="e.g. Golden Retriever, Siamese, Holland Lop"
+                    value={breed}
+                    onChange={(e) => setBreed(e.target.value)}
+                    className="input-control"
+                  />
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="age">Age</label>
+                  <input
+                    type="text"
+                    id="age"
+                    placeholder="e.g. 2 Years, 6 Months"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    className="input-control"
+                  />
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="gender">Gender</label>
+                  <select
+                    id="gender"
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                    className="select-control"
+                  >
+                    <option value="Male">♂️ Male</option>
+                    <option value="Female">♀️ Female</option>
+                  </select>
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="weight">Weight / Size</label>
+                  <input
+                    type="text"
+                    id="weight"
+                    placeholder="e.g. 15 lbs, 65 lbs, Small"
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)}
+                    className="input-control"
+                  />
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="location">Shelter / Location</label>
+                  <input
+                    type="text"
+                    id="location"
+                    placeholder="e.g. Sunshine Animal Shelter, SF"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="input-control"
+                  />
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="adoptionFee">Adoption Fee</label>
+                  <input
+                    type="text"
+                    id="adoptionFee"
+                    placeholder="e.g. $150, $200, Waived"
+                    value={adoptionFee}
+                    onChange={(e) => setAdoptionFee(e.target.value)}
+                    className="input-control"
+                  />
+                </div>
+              </div>
+
+              {/* Personality Traits & Health Pass */}
+              <div className="form-grid-2col">
+                <div className="form-field">
+                  <label htmlFor="personalityInput">Personality Traits (Comma Separated)</label>
+                  <input
+                    type="text"
+                    id="personalityInput"
+                    placeholder="e.g. Playful, Cuddlebug, Energetic, House Trained"
+                    value={personalityInput}
+                    onChange={(e) => setPersonalityInput(e.target.value)}
+                    className="input-control"
+                  />
+                </div>
+
+                <div className="form-field">
+                  <label>Medical & Health Pass Record</label>
+                  <div className="health-checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={vaccinated}
+                        onChange={(e) => setVaccinated(e.target.checked)}
+                      />
+                      💉 Vaccinations Up to Date
+                    </label>
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={spayedNeutered}
+                        onChange={(e) => setSpayedNeutered(e.target.checked)}
+                      />
+                      ✂️ Spayed / Neutered
+                    </label>
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={microchipped}
+                        onChange={(e) => setMicrochipped(e.target.checked)}
+                      />
+                      🏷️ Microchipped
+                    </label>
+                  </div>
+                </div>
+              </div>
+
               {/* 5. Image Upload */}
               <div className="form-field">
                 <label htmlFor="imageUpload">Upload Pet Photo (Thumbnail Preview)</label>
@@ -1247,7 +1683,7 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
               {/* 6. Description */}
               <div className="form-field">
                 <label htmlFor="description">
-                  Pet Description & Story <span className="req">*</span>
+                  Pet Description & Biography <span className="req">*</span>
                 </label>
                 <textarea
                   id="description"
@@ -1299,8 +1735,8 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
         <div className="print-only-card-wrapper">
           <div className="printable-pet-card">
             <div className="print-header">
-              <h1>Paw-Fect Match Information Sheet</h1>
-              <p>Official Record • Printed on {new Date().toLocaleDateString()}</p>
+              <h1>🐾 Paw-Fect Match Pet Adoption Passport</h1>
+              <p>Official Record & Profile Sheet • Printed on {new Date().toLocaleDateString()}</p>
             </div>
 
             <div className="print-body">
@@ -1308,25 +1744,42 @@ export default function PetAdoptionManager({ isFormOpen: propsIsFormOpen, setIsF
                 <img src={activePrintPet.image} alt={activePrintPet.name} className="print-img" />
               )}
               <div className="print-details">
-                <h2>{activePrintPet.name}</h2>
+                <h2>{activePrintPet.name} ({activePrintPet.category})</h2>
                 <div className="print-row"><strong>Auto Pet ID:</strong> {activePrintPet.id}</div>
-                <div className="print-row"><strong>Category:</strong> {activePrintPet.category}</div>
+                <div className="print-row"><strong>Breed:</strong> {activePrintPet.breed || activePrintPet.category}</div>
+                <div className="print-row"><strong>Age & Gender:</strong> {activePrintPet.age || '1 Year'} • {activePrintPet.gender || 'Male'}</div>
+                <div className="print-row"><strong>Weight:</strong> {activePrintPet.weight || 'Standard'}</div>
+                <div className="print-row"><strong>Adoption Fee:</strong> {activePrintPet.adoptionFee || '$150'}</div>
+                <div className="print-row"><strong>Location:</strong> {activePrintPet.location || 'Local Rescue Partner'}</div>
+
                 {activePrintPet.isUrgent && (
-                  <div className="print-row"><strong>Urgency Priority:</strong> ❤️ URGENT SPECIAL CARE</div>
+                  <div className="print-row urgent-print"><strong>Urgency Priority:</strong> ❤️ URGENT SPECIAL CARE REQUIRED</div>
                 )}
+
                 <div className="print-row">
                   <strong>Status:</strong>{' '}
                   <span className={`print-badge ${activePrintPet.status === 'Available' ? 'print-green' : 'print-red'}`}>
                     {activePrintPet.status}
                   </span>
                 </div>
-                <div className="print-row"><strong>Description:</strong></div>
-                <p className="print-desc">{activePrintPet.description}</p>
+
+                {activePrintPet.personality && activePrintPet.personality.length > 0 && (
+                  <div className="print-row">
+                    <strong>Personality Traits:</strong> {activePrintPet.personality.join(', ')}
+                  </div>
+                )}
+
+                <div className="print-row">
+                  <strong>Medical Record:</strong> Vaccinated: {activePrintPet.health?.vaccinated !== false ? 'Yes' : 'No'} | Spayed/Neutered: {activePrintPet.health?.spayedNeutered !== false ? 'Yes' : 'No'} | Microchipped: {activePrintPet.health?.microchipped ? 'Yes' : 'No'}
+                </div>
+
+                <div className="print-row"><strong>Biography & Notes:</strong></div>
+                <p className="print-desc">{activePrintPet.bioStory || activePrintPet.description}</p>
               </div>
             </div>
 
             <div className="print-footer">
-              <p>Paw-Fect Match Portal • www.pawfect-match.example</p>
+              <p>Paw-Fect Match Adoption Platform • Smart Compatibility Portal</p>
             </div>
           </div>
         </div>

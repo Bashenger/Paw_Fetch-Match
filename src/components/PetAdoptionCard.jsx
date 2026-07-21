@@ -13,10 +13,13 @@ import React, { useState } from 'react';
  * - Modern, clean UI styling using inline CSS objects (zero external CSS file dependencies).
  */
 export default function PetAdoptionCard() {
-  // 1. Multiple useState hooks for individual form controls
+  // 1. Multiple useState hooks for individual form controls & pet profile attributes
   const [petName, setPetName] = useState('');
   const [petId, setPetId] = useState('');
   const [category, setCategory] = useState('Dog');
+  const [breed, setBreed] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('Male');
   const [status, setStatus] = useState('Available');
   const [description, setDescription] = useState('');
 
@@ -38,6 +41,9 @@ export default function PetAdoptionCard() {
       petName,
       petId,
       category,
+      breed: breed.trim() || category,
+      age: age.trim() || '1 Year',
+      gender: gender || 'Male',
       status,
       description,
       submittedAt: new Date().toLocaleTimeString()
@@ -49,6 +55,9 @@ export default function PetAdoptionCard() {
     setPetName('');
     setPetId('');
     setCategory('Dog');
+    setBreed('');
+    setAge('');
+    setGender('Male');
     setStatus('Available');
     setDescription('');
     setSubmittedCard(null); // Hides the card
@@ -275,6 +284,53 @@ export default function PetAdoptionCard() {
           </select>
         </div>
 
+        {/* Profile Breed & Age Inputs */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div style={styles.formGroup}>
+            <label htmlFor="breed" style={styles.label}>
+              Breed
+            </label>
+            <input
+              type="text"
+              id="breed"
+              placeholder="e.g. Golden Retriever"
+              value={breed}
+              onChange={(e) => setBreed(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+
+          <div style={styles.formGroup}>
+            <label htmlFor="age" style={styles.label}>
+              Age
+            </label>
+            <input
+              type="text"
+              id="age"
+              placeholder="e.g. 2 Years"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+        </div>
+
+        {/* Gender Select */}
+        <div style={styles.formGroup}>
+          <label htmlFor="gender" style={styles.label}>
+            Gender
+          </label>
+          <select
+            id="gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            style={styles.select}
+          >
+            <option value="Male">♂️ Male</option>
+            <option value="Female">♀️ Female</option>
+          </select>
+        </div>
+
         {/* 4. Status Radio Buttons (Available, Adopted) */}
         <div style={styles.formGroup}>
           <label style={styles.label}>Status</label>
@@ -306,7 +362,7 @@ export default function PetAdoptionCard() {
         {/* 5. Description Textarea */}
         <div style={styles.formGroup}>
           <label htmlFor="description" style={styles.label}>
-            Description
+            Description & Biography
           </label>
           <textarea
             id="description"
@@ -334,7 +390,7 @@ export default function PetAdoptionCard() {
       {submittedCard && (
         <div style={styles.card}>
           <div style={styles.cardHeader}>
-            <h3 style={styles.cardTitle}>📋 Pet Adoption Information Card</h3>
+            <h3 style={styles.cardTitle}>📋 Generated Pet Profile Card</h3>
             <span style={styles.cardMeta}>{submittedCard.submittedAt}</span>
           </div>
 
@@ -347,7 +403,11 @@ export default function PetAdoptionCard() {
           </div>
 
           <div style={styles.cardRow}>
-            <strong>Category:</strong> {submittedCard.category}
+            <strong>Category & Breed:</strong> {submittedCard.category} ({submittedCard.breed})
+          </div>
+
+          <div style={styles.cardRow}>
+            <strong>Age & Gender:</strong> {submittedCard.age} • {submittedCard.gender}
           </div>
 
           {/* Status Badge: Green background for 'Available', Red for 'Adopted' */}

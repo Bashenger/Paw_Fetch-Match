@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 const HERO_SLIDES = [
   {
     id: 1,
-    badge: '🎯 Paw-Fect Compatibility Engine',
-    title: 'Find Your Paw-Fect Match Based on Your Living Situation',
-    subtitle: 'Calculate your personalized compatibility score (%) with rescued pets based on your home, kids, and pets.',
-    ctaText: 'Calculate Your Paw-Fect Match',
-    secondaryCta: 'Post Pet for Adoption',
-    image: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1600&q=95',
-    stats: '100% Intelligent Match Scoring'
+    badge: '🐾 Why Buy? Adopt',
+    title: 'Why Buy? Adopt. Lots of Pets Need Your Attention',
+    subtitle: 'Give a loving home to rescued pets. Calculate your personalized compatibility score (%) instantly.',
+    ctaText: 'Adopt a Pet',
+    secondaryCta: 'List Pet for Adoption',
+    image: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1920&h=1080&crop=entropy&q=95',
+    stats: '1,200+ Happy Rescued Pets'
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const HERO_SLIDES = [
     subtitle: 'Every pet is evaluated for temperament and living suitability so you get a seamless home adoption fit.',
     ctaText: 'Explore Match Scores',
     secondaryCta: 'Share Pet Cards',
-    image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1600&q=95',
+    image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1920&h=1080&crop=entropy&q=95',
     stats: '98% Happy Home Matches'
   },
   {
@@ -28,8 +28,8 @@ const HERO_SLIDES = [
     subtitle: 'Browse health-checked, vaccinated pets and see instantly who fits your daily routine.',
     ctaText: 'View Ranked Gallery',
     secondaryCta: 'Learn Compatibility Criteria',
-    image: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=1600&q=95',
-    stats: '1,200+ Pets Rescued'
+    image: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=1920&h=1080&crop=entropy&q=95',
+    stats: '100% Verified Shelter Rescues'
   }
 ];
 
@@ -66,7 +66,7 @@ export default function HeroCarousel({ onOpenForm }) {
   return (
     <section id="hero" className="hero-carousel-section">
       <div className="carousel-container">
-        {/* Background Image Slide */}
+        {/* Background Image Slide with Perfect Framing */}
         <div
           className="carousel-slide-bg"
           style={{ backgroundImage: `url(${slide.image})` }}
